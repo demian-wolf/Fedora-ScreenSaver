@@ -4,6 +4,7 @@ import tkinter as tk
 import tkinter.messagebox as tk_mbox
 import webbrowser
 import random
+import sys
 
 
 class ScreenSaver(tk.Tk):
@@ -15,8 +16,10 @@ class ScreenSaver(tk.Tk):
         for attribute in ("-fullscreen", "-topmost"):
             self.attributes(attribute, True)
 
-        for event in ("<Motion>", "<Key>"):
-            self.bind(event, lambda ev: self.destroy())
+        self.first_motion_destroy = True
+        
+        self.bind("<Motion>", self.destroy_on_motion)
+        self.bind("<Key>", lambda ev: self.destroy())
 
         self.bind("<F1>", self.about)
         self.bind("<F12>", self.visit_github)
@@ -55,6 +58,14 @@ class ScreenSaver(tk.Tk):
     def visit_github(self, event=None):
         webbrowser.open("https://github.com/demian-wolf/")
         self.destroy()
+
+    def destroy_on_motion(self, event=None):
+        """Workaround due to Tk behavior on Linux systems."""
+        if not self.first_motion_destroy or sys.platform != "linux":
+            self.destroy()
+            return
+        self.first_motion_destroy = False
+        
 
 
 if __name__ == "__main__":
