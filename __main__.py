@@ -17,7 +17,7 @@ class ScreenSaver(tk.Tk):
             self.attributes(attribute, True)
 
         self.first_motion_destroy = True
-        
+
         self.bind("<Motion>", self.destroy_on_motion)
         self.bind("<Key>", lambda ev: self.destroy())
 
@@ -50,10 +50,10 @@ class ScreenSaver(tk.Tk):
     def about(self, event=None):
         tk_mbox.showinfo("About...",
                          ("Fedora ScreenSaver\n"
-                         "(C) Demian Wolf 2020\n" 
-                         "A simple screensaver for Fedora (moving Fedora logo on a gray background).\n"
-                         "Thank you for using my program!\n"
-                         "Visit my Github: https://github.com/demian-wolf/ (press F12 key)"))
+                          "(C) Demian Wolf 2020\n"
+                          "A simple screensaver for Fedora (moving Fedora logo on a gray background).\n"
+                          "Thank you for using my program!\n"
+                          "Visit my Github: https://github.com/demian-wolf/ (press F12 key)"))
 
     def visit_github(self, event=None):
         webbrowser.open("https://github.com/demian-wolf/")
@@ -65,7 +65,6 @@ class ScreenSaver(tk.Tk):
             self.destroy()
             return
         self.first_motion_destroy = False
-        
 
 
 if __name__ == "__main__":
